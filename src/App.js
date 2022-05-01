@@ -450,7 +450,7 @@ var myContract =  new web3.eth.Contract([
       for (var i = 1; i <= UserTransactionCount; i++) {
         const trans = await myContract.methods.getUserTransaction(i).call({ from: this.state.account })
         this.setState({
-          request: [...this.state.request, trans]
+          UserTransaction: [...this.state.UserTransaction, trans]
         })
       }
       console.log(this.state.request)
@@ -462,7 +462,7 @@ var myContract =  new web3.eth.Contract([
       for (var i = 1; i <= productCount; i++) {
         const product = await myContract.methods.products(i).call({ from: this.state.account })
         this.setState({
-          products: [...this.state.UserTransaction, product]
+          products: [...this.state.products, product]
         })
       }
       // const requesta = await marketplace.methods.getRequest().call({ from: this.state.account })
