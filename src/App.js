@@ -338,7 +338,7 @@ var myContract =  new web3.eth.Contract([
           <div className="row">
             <main >
               { this.state.loading
-                ? <MainTest/>
+                ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
                 : <Main
                 createProduct={this.createProduct}
                 products={this.state.products}
