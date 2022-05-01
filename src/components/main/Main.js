@@ -39,7 +39,7 @@ class Main extends Component {
       
       <Route path="/add" element={
         <AddProduct 
-        createProduct={this.createProduct}/>}/>
+        createProduct={this.props.createProduct}/>}/>
       
       </Routes>
     </Router>

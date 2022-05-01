@@ -36,6 +36,7 @@ class App extends Component {
 
 // Contract.setProvider(new Web3.providers.HttpProvider('http://localhost:8545'));
 var myContract =  new web3.eth.Contract([
+  
   {
     "anonymous": false,
     "inputs": [
@@ -58,7 +59,7 @@ var myContract =  new web3.eth.Contract([
         "type": "address"
       }
     ],
-    "name": "ProductCreated",
+    "name": "EquipmentCreated",
     "type": "event"
   },
   {
@@ -83,7 +84,26 @@ var myContract =  new web3.eth.Contract([
         "type": "address"
       }
     ],
-    "name": "ProductPurchased",
+    "name": "EquipmentTransfered",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      }
+    ],
+    "name": "RequestCreated",
     "type": "event"
   },
   {
@@ -97,6 +117,79 @@ var myContract =  new web3.eth.Contract([
     "name": "createProduct",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_rcount",
+        "type": "uint256"
+      }
+    ],
+    "name": "deleteRequest",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_rcount",
+        "type": "uint256"
+      }
+    ],
+    "name": "getProductTransaction",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "from",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct Marketplace.transaction",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_id",
+        "type": "uint256"
+      }
+    ],
+    "name": "getProductTransactionCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -144,12 +237,80 @@ var myContract =  new web3.eth.Contract([
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_rcount",
+        "type": "uint256"
+      }
+    ],
+    "name": "getUserTransaction",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "from",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct Marketplace.transaction",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getUserTransactionCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "productCount",
     "outputs": [
       {
         "internalType": "uint256",
         "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "product_history",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "TransactionCount",
         "type": "uint256"
       }
     ],
@@ -234,11 +395,31 @@ var myContract =  new web3.eth.Contract([
     ],
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "user_history",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "TransactionCount",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   }
+
 ],
-    "0x995dfde7b37d89a6eadfa99bdb3718bad965873e",
+    "0x71099e5fb8e60df2ededa6d43fc33524a9b8e665",
     { from : this.state.account,
-    gas: 1500000,
+    gas: 150000,
     gasPrice: '30000000000'}
 );
 
@@ -263,6 +444,16 @@ var myContract =  new web3.eth.Contract([
         })
       }
 
+
+       const UserTransactionCount = await myContract.methods.getUserTransactionCount().call({ from: this.state.account })
+      this.setState({ UserTransactionCount })
+      console.log("UserTransactionCount: " + UserTransactionCount)
+      for (var i = 1; i <= UserTransactionCount; i++) {
+        const trans = await myContract.methods.getUserTransaction(i).call({ from: this.state.account })
+        this.setState({
+          UserTransaction: [...this.state.UserTransaction, trans]
+        })
+      }
       console.log(this.state.request)
       // console.log(requestCount)
 
@@ -293,7 +484,9 @@ var myContract =  new web3.eth.Contract([
       products: [],
       loading: true,
       requestCount:0,
-      request:[]
+      request:[],
+       UserTransactionCount:0,
+      UserTransaction:[]
     }
 
     this.createProduct = this.createProduct.bind(this)
@@ -303,9 +496,13 @@ var myContract =  new web3.eth.Contract([
   }
 
   createProduct(name) {
+    console.log(name)
     this.setState({ loading: true })
     this.state.myContract.methods.createProduct(name).send({ from: this.state.account })
     .once('receipt', (receipt) => {
+      console.log(receipt)
+
+
       this.setState({ loading: false })
     })
   }
@@ -322,6 +519,8 @@ var myContract =  new web3.eth.Contract([
     this.setState({ loading: true })
     this.state.myContract.methods.requestProduct(id).send({ from: this.state.account })
     .once('receipt', (receipt) => {
+            console.log(receipt)
+
       this.setState({ loading: false })
     })
   }
@@ -330,6 +529,8 @@ var myContract =  new web3.eth.Contract([
   
 
   render() {
+
+
     return (
       <div>
         <Navbar account={this.state.account} />
@@ -348,6 +549,7 @@ var myContract =  new web3.eth.Contract([
                 purchaseProduct={this.purchaseProduct}
                   
                   />
+
               }
             </main>
           </div>
