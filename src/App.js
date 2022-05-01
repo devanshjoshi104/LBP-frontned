@@ -418,7 +418,7 @@ var myContract =  new web3.eth.Contract([
 ],
     "0x71099e5fb8e60df2ededa6d43fc33524a9b8e665",
     { from : this.state.account,
-    gas: 1500000,
+    gas: 150000,
     gasPrice: '30000000000'}
 );
 
