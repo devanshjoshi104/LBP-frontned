@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Web3 from 'web3'
-import Navbarswitch from './Navbarswitch'
+import Navbarswitch from './components/navbar/Navbarswitch'
 
 import './App.css';
-import Navbar from './Navbar'
-import Main from './Main'
+import Navbar from './components/navbar/Navbar'
+import Main from './components/main/Main'
+import MainTest from './components/main/MainTest';
 
 class App extends Component {
 
@@ -337,7 +338,7 @@ var myContract =  new web3.eth.Contract([
           <div className="row">
             <main >
               { this.state.loading
-                ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
+                ? <MainTest/>
                 : <Main
                 createProduct={this.createProduct}
                 products={this.state.products}

@@ -5,11 +5,11 @@ import {
   Routes,
   Link
 } from "react-router-dom";
-import Navbarswitch from './Navbarswitch'
+import Navbarswitch from '../navbar/Navbarswitch'
 
-import Equipments from './Equipments'
-import Request from './Request'
-import AddProduct from './AddProduct'
+import Equipments from '../equipments/Equipments'
+import Request from '../../Request'
+import AddProduct from '../addProduct/AddProduct'
 
 class Main extends Component {
 

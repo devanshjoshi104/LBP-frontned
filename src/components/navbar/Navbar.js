@@ -4,10 +4,10 @@ class Navbar extends Component {
 
   render() {
     return (
-      <nav className="Navbar-container">
-        <h1 className="nav-heading">
-          Lab Equipments 
-       </h1>
+      <nav className="Navbar-container fs-4 py-2 px-2 d-flex align-items-center">
+        <div className="nav-heading " >
+          Distributed Ledger for Campus LABS 
+       </div>
         <h1 className="account">{this.props.account}</h1>
       </nav>
     );
