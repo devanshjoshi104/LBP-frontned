@@ -1,11 +1,33 @@
 import React, { Component } from 'react';
-
+import ProductHistory  from '../productHistory/ProductHistory';
 class Equipments extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      visibility:false,
+      productId:1
+    }
+    this.toggleVisibility = this.toggleVisibility.bind(this)
+
+  }
+
+    toggleVisibility() {
+      this.setState({visibility:false})
+      // console.log("bhupi")
+    }
 
   render() {
     return (
-      <div id="content">
+      <div id="content" className='container'>
         
+
+        {this.state.visibility?
+        <ProductHistory productId={this.state.productId}
+        contract={this.props.contract}
+        products={this.props.products}
+        toggleVisibility={this.toggleVisibility}/>
+        
+        :null}
         
         <h2>Equipments </h2>
         <table className="table">
@@ -23,11 +45,11 @@ class Equipments extends Component {
               return(
                 <tr key={key}>
                   <th scope="row">{product.id.toString()}</th>
-                  <td>{product.name}</td>
+                  <td onClick={()=>this.setState({visibility:true, productId:product.id})} style={{cursor:"pointer"}}>{product.name}</td>
                   <td>{product.owner}</td>
                   <td>
                     { !product.purchased
-                      ? <button
+                      ? <button className='btn btn-success'
                           name={product.id}
                           value={product.price}
                           onClick={(event) => {
@@ -37,7 +59,9 @@ class Equipments extends Component {
                         >
                           Request
                         </button>
-                      : null
+                      : <button>
+
+                      </button>
                     }
                     </td>
                 </tr>

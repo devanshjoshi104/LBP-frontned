@@ -5,11 +5,12 @@ import {
   Routes,
   Link
 } from "react-router-dom";
-import Navbarswitch from './Navbarswitch'
+import Navbarswitch from '../navbar/Navbarswitch'
 
-import Equipments from './Equipments'
-import Request from './Request'
-import AddProduct from './AddProduct'
+import Equipments from '../equipments/Equipments'
+import Request from '../../Request'
+import AddProduct from '../addProduct/AddProduct'
+import UserTransaction from '../userTransaction/UserTransaction';
 
 class Main extends Component {
 
@@ -26,6 +27,7 @@ class Main extends Component {
         requestProduct={this.props.requestProduct}
         requestCount={this.props.requestCount}
         request={this.props.request}
+        contract={this.props.contract}
         purchaseProduct={this.props.purchaseProduct} /> }/>
         
       
@@ -35,11 +37,13 @@ class Main extends Component {
         requestProduct={this.props.requestProduct}
         requestCount={this.props.requestCount}
         request={this.props.request}
+        deleteRequest={this.props.deleteRequest}
         purchaseProduct={this.props.purchaseProduct} />}/>
       
       <Route path="/add" element={
         <AddProduct 
         createProduct={this.props.createProduct}/>}/>
+       
       
       </Routes>
     </Router>
