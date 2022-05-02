@@ -515,7 +515,8 @@ var myContract =  new web3.eth.Contract( [
   requestProduct(id) {
     this.setState({ loading: true })
     this.state.myContract.methods.requestProduct(id).send({ from: this.state.account })
-    .once('receipt', (receipt) => {
+    .then('receipt', (receipt) => {
+			console.log("hello")
             if(receipt.code===4001){
               console.log("transaction declined!");
               this.setState({ loading: false })
@@ -543,7 +544,7 @@ var myContract =  new web3.eth.Contract( [
           <div className="row">
             <main >
               { this.state.loading
-                ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
+                ? <div id="loader" className="text-center d-flex align-items-center w-100 justify-content-center fs-4" style={{height:"70vh",fontWeight:"600"}}><p className="text-center">Loading...</p></div>
                 : <Main
                 contract={this.state.myContract}
                 deleteRequest={this.deleteRequest}

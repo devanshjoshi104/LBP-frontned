@@ -23,7 +23,7 @@ class Request extends Component {
           <tbody id="productList">
            { this.props.request.map((req, key) => {
               return(
-                 <tr >
+                 <tr className='align-items-center'>
                
                   <th scope="row">{key+1}</th>
                   <td>{
@@ -31,7 +31,9 @@ class Request extends Component {
                   <td>{req.owner}</td>
                   <td>
                     { req.productID>0
-                      ? <div><button style={{margin:'10px'}}
+                      ? <div className='d-flex flex-row-reverse'><button  
+                         style={{padding:"0.2rem 1rem",borderRadius:"0.5rem 0.5rem 0.5rem/0.5rem 0.5rem",border:"none",cursor:"pointer",background: "#1DB92C",fontWeight:"400",color:"white"}}
+                          
                           name={req.productID}
                           onClick={(event) => {
                             console.log(event.target.name)
@@ -41,7 +43,8 @@ class Request extends Component {
                         >
                           Accept
                         </button>
-                        <button
+                        <button classname="button btn-reject"
+                          style={{marginRight:'20px',padding:"0.2rem 1rem",borderRadius:"0.5rem 0.5rem 0.5rem/0.5rem 0.5rem",border:"none",cursor:"pointer",background: "#FF3434",fontWeight:"400",color:"white"}}
                           name={req.productID}
                           onClick={(event) => {
                             console.log(event.target.name)
