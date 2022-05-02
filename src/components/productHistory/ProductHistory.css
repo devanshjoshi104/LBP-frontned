@@ -3,13 +3,20 @@
     top:20vh;
     left:10vw;
     height: 70vh;
+    padding: 4rem;
     width: 80vw;
-    background-color: rgb(81, 162, 233);
+    background-color: rgb(231, 244, 255);
+    border-radius: 3rem 3rem 3rem/3rem 3rem;
+    color: rgb(66, 66, 66);
+    
 }
 
 .product-history-close{
     position: absolute;
-    right: 10px;
-    top:20px;
+    background-image: url('./Vectorclose.svg');
+    height: 20px;
+    width: 20px;
+    right: 31px;
+    top:31px;
     cursor: pointer;
 }

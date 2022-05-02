@@ -29,7 +29,7 @@ class ProductHistory extends Component {
   	// console.log(this.props.productId)
     return (
         <div className='product-history-container'>
-            <div className='product-history-close' onClick={ this.props.toggleVisibility}>close</div>
+            <div className='product-history-close' onClick={ this.props.toggleVisibility}></div>
         
         <h2>Product transaction history </h2>
         <table className="table">
