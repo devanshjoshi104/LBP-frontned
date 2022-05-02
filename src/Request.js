@@ -4,7 +4,7 @@ class Request extends Component {
 
   render() {
     return (
-      <div id="content">
+      <div  className='container'>
        
         <h2>Requests </h2>
         <table className="table">
@@ -31,16 +31,28 @@ class Request extends Component {
                   <td>{req.owner}</td>
                   <td>
                     { req.productID>0
-                      ? <button
+                      ? <div><button style={{margin:'10px'}}
                           name={req.productID}
                           onClick={(event) => {
                             console.log(event.target.name)
                             const _k=key+1;
-                            this.props.purchaseProduct(1,_k)
+                            this.props.purchaseProduct(_k)
                           }}
                         >
                           Accept
                         </button>
+                        <button
+                          name={req.productID}
+                          onClick={(event) => {
+                            console.log(event.target.name)
+                            const _k=key+1;
+                            this.props.deleteRequest(_k)
+                          }}
+                        >
+                          Reject
+                        </button>
+                        </div>
+                        
                       : null
                     }
                     </td>
