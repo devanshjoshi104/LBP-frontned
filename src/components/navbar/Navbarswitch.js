@@ -9,7 +9,7 @@ class Navbarswitch extends Component {
 
       <div className='container navswitch'>
       <div className='options d-flex justify-content-around'>
-         <Link to = "/"  className='button active btn'>Equipments</Link>
+         <Link to = "/"  className='button  btn'>Equipments</Link>
          < Link to = "/request" className='button btn'>Requests</Link>
          < Link to = "/add" className='button btn'>Add product</Link>
       </div>
